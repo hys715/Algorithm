@@ -118,7 +118,7 @@ int main() {
 		val[i] = read(), tmp[i] = val[i];
 	sort(tmp + 1, tmp + 1 + n);
 	for (int i = 1; i <= n; ++i)
-		val[i] = lower_bound(tmp + 1, tmp + 1 + n, val[i]) - tmp;
+		val[i] = lower_bound(tmp + 1, tmp + 1 + n, val[i]) - tmp;	// 离散化
 	for (int i = 1; i < n; ++i) {
 		u = read(), v = read();
 		add(u, v);

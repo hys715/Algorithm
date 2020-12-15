@@ -12,6 +12,7 @@ struct edge {
     int to, next;
 } e[80010];
 
+// 访问单元
 struct query {
 	int l, r, id, lca;
 	bool operator<(const query& other) const {
@@ -20,11 +21,13 @@ struct query {
 	}
 } q[100005];
 
+// 加边
 void add(int u, int v) {
     e[++cnt] = edge{v, head[u]}, head[u] = cnt;
     e[++cnt] = edge{u, head[v]}, head[v] = cnt;
 }
 
+// 快读
 int read() {
     int x = 0;
     bool flag = false;
@@ -40,11 +43,13 @@ int read() {
     return flag ? -x : x;
 }
 
+// 快输
 void write(int x) {
     if (x > 9) write(x / 10);
     putchar(x % 10 + '0');
 }
 
+// 深搜，分层，欧拉序
 void dfs1(int u) {
 	ord[++num] = u, st[u] = num;
     sz[u] = 1;
@@ -58,6 +63,7 @@ void dfs1(int u) {
 	ord[++num] = u, ed[u] = num;
 }
 
+// 深搜，找轻重链
 void dfs2(int u) {
     int v = 0;
     if (!top[u]) top[u] = u;
@@ -73,6 +79,7 @@ void dfs2(int u) {
             dfs2(e[i].to);
 }
 
+// 最近公共祖先
 int lca(int x, int y) {
     while (top[x] != top[y]) {
         if (depth[top[x]] > depth[top[y]]) x = f[top[x]];
@@ -81,11 +88,13 @@ int lca(int x, int y) {
     return depth[x] < depth[y] ? x : y;
 }
 
+// 区间计数
 void calc(int x) {
 	vis[x] ? now -= !--counter[val[x]] : now += !counter[val[x]]++;
 	vis[x] = !vis[x];
 }
 
+// 树上莫队
 void MoQue() {
 	int size = sqrt(num), bnum = ceil((double)num / size), l = 1, r = 0;
 	for (int i = 1; i <= bnum; ++i)
